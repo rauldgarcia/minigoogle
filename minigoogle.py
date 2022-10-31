@@ -38,8 +38,6 @@ def bmh(a,b): # busca b dentro de a, retorna None (fracaso) o posición del calc
 
 #BUSQUEDA DE PALABRA EN ARCHIVO ESPECIFICO
 palabra=input('Ingrese la palabra que desea buscar:')
-print(palabra)
-
 cont=0
 nlinea=0
 with open("Analisis de Algoritmos.txt") as archivo:
@@ -56,8 +54,6 @@ print(cont)
 
 #BUSQUEDA DE PALABRA EN TODA LA CARPETA Y ORDENAMIENTO
 palabra=input('Ingrese la palabra que desea buscar:')
-print(palabra)
-
 for i in range(10):
 
     cont=0
@@ -70,6 +66,34 @@ for i in range(10):
             if busqueda != None:
                 cont=cont+1
 
+    contlibros[i]=cont
+
+dic=dict(zip(libros,contlibros))
+
+ord=(sorted(dic.items(),key=operator.itemgetter(1),reverse=True))
+for i in ord:
+    print(i)
+
+#BUSQUEDA DE VARIAS PALABRAS EN TODA LA CARPETA Y ORDENAMIENTO
+palabra=input('Ingrese la palabra que desea buscar:')
+palabras=palabra.split()
+largo=len(palabras)
+for i in range(10):
+
+    cont=0
+    nlinea=0
+    libro=libros[i]
+    with open(libro) as archivo:
+        for linea in archivo:
+            nlinea=nlinea+1
+            busqueda=bmh(linea,palabra)
+            if busqueda != None:
+                cont=cont+1
+            for j in range(largo):
+                palabrasola=palabras[j]
+                busqueda=bmh(linea,palabrasola)
+                if busqueda != None:
+                    cont=cont+1
     contlibros[i]=cont
 
 dic=dict(zip(libros,contlibros))
