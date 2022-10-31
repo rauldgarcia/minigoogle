@@ -5,13 +5,16 @@ libros=["Analisis de Algoritmos.txt",
     "Artificial Intelligence A Modern Approach.txt",
     "Introduction to algorithms.txt",
     "Introduction to the Design and Analysis of Algorithms.txt",
-    "Introduction To The Theory Of Computation.txt",
     "Pattern Recognition and Machine Learning .txt",
+    "pia-slides-01.txt",
+    "pia-slides-02.txt",
+    "pia-slides-03.txt",
+    "pia-slides-04.txt",
+    "pia-slides-05.txt",
     "Probability and Computing Randomization and Probabilistic Techniques in Algorithms and Data Analysis.txt",
     "PROLOG.txt",
-    "Remote Sensing Digital Image Analysis.txt",
-    "Theory of Computation.txt"]
-contlibros=[0,0,0,0,0,0,0,0,0,0]
+    "Remote Sensing Digital Image Analysis.txt"]
+contlibros=[0,0,0,0,0,0,0,0,0,0,0,0,0]
 
 def construyeg(b): # construye un diccionario para representar la función g
     d={}
@@ -60,7 +63,7 @@ largo=len(palabras)
 
 #si es una sola palabra
 if largo==1:
-    for i in range(10):
+    for i in range(13):
         cont=0
         nlinea=0
         libro=libros[i]
@@ -81,7 +84,7 @@ if largo==1:
 
 #si tiene mas de una palabra
 if largo > 1:
-    for i in range(10):
+    for i in range(13):
 
         cont=0
         nlinea=0
