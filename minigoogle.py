@@ -38,9 +38,10 @@ def bmh(a,b): # busca b dentro de a, retorna None (fracaso) o posición del calc
 
 #BUSQUEDA DE PALABRA EN ARCHIVO ESPECIFICO
 palabra=input('Ingrese la palabra que desea buscar:')
+texto=input("Ingrese el nombre del archivo de texto donde se buscara:")
 cont=0
 nlinea=0
-with open("Analisis de Algoritmos.txt") as archivo:
+with open(texto) as archivo:
     for linea in archivo:
         nlinea=nlinea+1
         busqueda=bmh(linea,palabra)
@@ -53,51 +54,53 @@ print("El numero de veces que se encontro la palabra es:")
 print(cont)
 
 #BUSQUEDA DE PALABRA EN TODA LA CARPETA Y ORDENAMIENTO
-palabra=input('Ingrese la palabra que desea buscar:')
-for i in range(10):
-
-    cont=0
-    nlinea=0
-    libro=libros[i]
-    with open(libro) as archivo:
-        for linea in archivo:
-            nlinea=nlinea+1
-            busqueda=bmh(linea,palabra)
-            if busqueda != None:
-                cont=cont+1
-
-    contlibros[i]=cont
-
-dic=dict(zip(libros,contlibros))
-
-ord=(sorted(dic.items(),key=operator.itemgetter(1),reverse=True))
-for i in ord:
-    print(i)
-
-#BUSQUEDA DE VARIAS PALABRAS EN TODA LA CARPETA Y ORDENAMIENTO
-palabra=input('Ingrese la palabra que desea buscar:')
+palabra=input('Ingrese lo que desea buscar:')
 palabras=palabra.split()
 largo=len(palabras)
-for i in range(10):
 
-    cont=0
-    nlinea=0
-    libro=libros[i]
-    with open(libro) as archivo:
-        for linea in archivo:
-            nlinea=nlinea+1
-            busqueda=bmh(linea,palabra)
-            if busqueda != None:
-                cont=cont+1
-            for j in range(largo):
-                palabrasola=palabras[j]
-                busqueda=bmh(linea,palabrasola)
+#si es una sola palabra
+if largo==1:
+    for i in range(10):
+        cont=0
+        nlinea=0
+        libro=libros[i]
+        with open(libro) as archivo:
+            for linea in archivo:
+                nlinea=nlinea+1
+                busqueda=bmh(linea,palabra)
                 if busqueda != None:
                     cont=cont+1
-    contlibros[i]=cont
 
-dic=dict(zip(libros,contlibros))
+        contlibros[i]=cont #se puede dividir entre nlinea para obtener la relacion de palabra/renglones
 
-ord=(sorted(dic.items(),key=operator.itemgetter(1),reverse=True))
-for i in ord:
-    print(i)
+    dic=dict(zip(libros,contlibros))
+
+    ord=(sorted(dic.items(),key=operator.itemgetter(1),reverse=True))
+    for i in ord:
+        print(i)
+
+#si tiene mas de una palabra
+if largo > 1:
+    for i in range(10):
+
+        cont=0
+        nlinea=0
+        libro=libros[i]
+        with open(libro) as archivo:
+            for linea in archivo:
+                nlinea=nlinea+1
+                busqueda=bmh(linea,palabra)
+                if busqueda != None:
+                    cont=cont+1
+                for j in range(largo):
+                    palabrasola=palabras[j]
+                    busqueda=bmh(linea,palabrasola)
+                    if busqueda != None:
+                        cont=cont+1
+        contlibros[i]=cont #se puede dividir entre nlinea para obtener la relacion de palabra/renglones
+
+    dic=dict(zip(libros,contlibros))
+
+    ord=(sorted(dic.items(),key=operator.itemgetter(1),reverse=True))
+    for i in ord:
+        print(i)
